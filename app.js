@@ -15,7 +15,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.engine(
   "hbs",
-  hbs({
+  hbs.engine({
     extname: "hbs",
     defualtLayout: "layout",
     layoutsDir: __dirname + "/views/layouts",
