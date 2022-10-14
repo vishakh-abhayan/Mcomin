@@ -29,7 +29,7 @@ router.get("/", function (req, res, next) {
     },
   ];
 
-  res.render("index", { product });
+  res.render("index", { product, admin: true });
 });
 
 module.exports = router;
