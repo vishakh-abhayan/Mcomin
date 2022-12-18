@@ -1,0 +1,30 @@
+<section>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Description</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each product}}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{this.item}}</td>
+            <td>{{this.cat}}</td>
+            <td>{{this.discibe}}</td>
+            <td><img
+                style="width: 50px;height: 50px;"
+                src="{{this.image}}"
+                alt=""
+              /></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
