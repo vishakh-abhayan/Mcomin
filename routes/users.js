@@ -5,10 +5,11 @@ var router = express.Router();
 router.get("/", function (req, res, next) {
   let product = [
     {
-      item: "Iphobe 13 pro",
+      item: "Iphobe 13 ",
       cat: "Mobile",
       discibe: "This is the best samrt phone ever made",
-      image: "https://m.media-amazon.com/images/I/61i8Vjb17SL._SL1500_.jpg",
+      image:
+        "https://s3bo.cashify.in/gpro/uploads/2020/11/29054414/apple-iphone-13-front-3.png?p=gp4sq&s=gp",
     },
     {
       item: "Google Pixel 7 Pro",
@@ -43,14 +44,14 @@ router.get("/", function (req, res, next) {
       cat: "Mobile",
       discibe: "This is the best samrt phone ever made",
       image:
-        "https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1662703416/Croma%20Assets/Communication/Mobiles/Images/261991_hhfa33.png/mxw_640,f_auto",
+        "https://s3bo.cashify.in/gpro/uploads/2021/09/12145745/apple-iphone-14-pro-max-front-2.jpg?p=gp4sq&s=gp",
     },
     {
       item: "Samsung Galaxy S22 Ultra 5G",
       cat: "Mobile",
       discibe: "This is the best samrt phone ever made",
       image:
-        "https://s3bo.cashify.in/gpro/uploads/2021/06/10114014/samsung-galaxy-s22-ultra-front-1.jpg?p=gp4sq&s=gp",
+        "https://s3bo.cashify.in/gpro/uploads/2020/03/08161318/samsung-galaxy-s20-plus-front.jpg?p=gp4sq&s=gp",
     },
     {
       item: "Nothing Phone (1)",
