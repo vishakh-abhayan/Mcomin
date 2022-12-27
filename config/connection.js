@@ -11,9 +11,8 @@ module.exports.connect = function (done) {
   mogoClient.connect(url, (err, data) => {
     if (err) return done(err);
     state.db = data.db(dbname);
+    done();
   });
-
-  done();
 };
 
 module.exports.get = function () {

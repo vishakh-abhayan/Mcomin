@@ -10,6 +10,7 @@ var usersRouter = require("./routes/users");
 var adminRouter = require("./routes/admin");
 
 var app = express();
+var db = require("./config/connection");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -31,6 +32,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 
+db.connect((err) => {
+  if (err) console.log("connection error" + err);
+  else console.log("database connected");
+});
 app.use("/", usersRouter);
 app.use("/admin", adminRouter);
 
