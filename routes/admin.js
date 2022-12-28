@@ -71,8 +71,16 @@ router.get("/add-products", function (req, res) {
 router.post("/add-products", (req, res) => {
   console.log(req.body);
   console.log(req.files.image);
-  productHelpers.addproducts(req.body, (result) => {
-    res.render("admin/add-products");
+  productHelpers.addproducts(req.body, (id) => {
+    let image = req.files.image;
+    console.log(id);
+    image.mv("./public/product-images/" + id + ".jpg", (err, done) => {
+      if (!err) {
+        res.render("admin/add-products");
+      } else {
+        console.log(err);
+      }
+    });
   });
 });
 
