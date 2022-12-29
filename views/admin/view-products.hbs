@@ -20,12 +20,12 @@
         {{#each product}}
           <tr>
             <th scope="row">1</th>
-            <td>{{this.item}}</td>
-            <td>{{this.cat}}</td>
-            <td>{{this.discibe}}</td>
+            <td>{{this.Name}}</td>
+            <td>{{this.Category}}</td>
+            <td>{{this.Description}}</td>
             <td><img
                 style="width: 50px;height: 50px;"
-                src="{{this.image}}"
+                src="/product-images/{{this._id}}.jpg"
                 alt=""
               /></td>
           </tr>
