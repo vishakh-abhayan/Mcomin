@@ -3,10 +3,14 @@
     {{#each product}}
       <div class="col-md-4">
         <div class="card mb-3" style="width: 18rem;">
-          <img src="{{image}}" class="card-img-top pt-2" alt="..." />
+          <img
+            src="/product-images/{{this._id}}.jpg"
+            class="card-img-top pt-2"
+            alt="..."
+          />
           <div class="card-body">
-            <h5 class="card-title">{{item}}</h5>
-            <p class="card-text">{{discibe}}</p>
+            <h5 class="card-title">{{this.Name}}</h5>
+            <p class="card-text">{{this.Description}}</p>
             <a href="#" class="btn btn-primary">Add to cart</a>
           </div>
         </div>
