@@ -69,8 +69,6 @@ router.get("/add-products", function (req, res) {
   res.render("admin/add-products");
 });
 router.post("/add-products", (req, res) => {
-  console.log(req.body);
-  console.log(req.files.image);
   productHelpers.addproducts(req.body, (id) => {
     let image = req.files.image;
     console.log(id);
