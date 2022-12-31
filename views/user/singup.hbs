@@ -1,21 +1,19 @@
 <section>
   <div class="container pt-5" style="height:auto; width: 40rem;">
-    <form>
-          <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input
-          type="text"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-      <div class="mb-3">
+    <h2 class="text-center">Create New Account</h2>
+
+    <form action="/singup" method="post">
+          <div class="mb-5">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" class="form-control" name="name"/>
+      <div class="mb-3 mt-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
           type="email"
           class="form-control"
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
+          name="email"
         />
         <div id="emailHelp" class="form-text">We'll never share your email with
           anyone else.</div>
@@ -26,9 +24,10 @@
           type="password"
           class="form-control"
           id="exampleInputPassword1"
+          name="password"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">Singup</button>
     </form>
   </div>
 </section>
