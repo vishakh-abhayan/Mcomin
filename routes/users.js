@@ -9,4 +9,12 @@ router.get("/", function (req, res, next) {
   });
 });
 
+router.get("/login", (req, res) => {
+  res.render("user/login");
+});
+
+router.get("/singup", (req, res) => {
+  res.render("user/singup");
+});
+
 module.exports = router;
