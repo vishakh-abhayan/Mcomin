@@ -15,4 +15,25 @@ module.exports = {
         });
     });
   },
+  doLogin: (userData) => {
+    return new Promise(async (resolve, reject) => {
+      let loginStatus = false;
+      let response = {};
+      let user = await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .findOne({ email: userData.email });
+      if (user) {
+        bcrypt.compare(userData.password, user.password).then((status) => {
+          if (status) {
+            console.log("login sucess");
+          } else {
+            console.log("login failed");
+          }
+        });
+      } else {
+        console.log("loging falied1");
+      }
+    });
+  },
 };
