@@ -10,8 +10,7 @@ module.exports = {
         .collection(collection.USER_COLLECTION)
         .insertOne(userData)
         .then((data) => {
-          console.log(data);
-          resolve(data);
+          resolve(data.insertedId);
         });
     });
   },
@@ -23,7 +22,9 @@ module.exports = {
         .get()
         .collection(collection.USER_COLLECTION)
         .findOne({ email: userData.email });
+      console.log(user);
       if (user) {
+        console.log(user);
         bcrypt.compare(userData.password, user.password).then((status) => {
           if (status) {
             console.log("login sucess");
