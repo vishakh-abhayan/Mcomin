@@ -28,12 +28,17 @@ module.exports = {
         bcrypt.compare(userData.password, user.password).then((status) => {
           if (status) {
             console.log("login sucess");
+            response.user = user;
+            response.status = true;
+            resolve(response);
           } else {
             console.log("login failed");
+            resolve({ status: false });
           }
         });
       } else {
-        console.log("loging falied1");
+        console.log("loging falied");
+        resolve({ status: false });
       }
     });
   },
