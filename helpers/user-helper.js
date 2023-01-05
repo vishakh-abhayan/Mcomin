@@ -24,7 +24,6 @@ module.exports = {
         .findOne({ email: userData.email });
       console.log(user);
       if (user) {
-        console.log(user);
         bcrypt.compare(userData.password, user.password).then((status) => {
           if (status) {
             console.log("login sucess");
