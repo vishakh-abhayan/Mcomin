@@ -11,6 +11,7 @@
           aria-describedby="emailHelp"
           name="email"
         />
+ 
 
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -21,6 +22,9 @@
           name="password"
         />
       </div>
+      {{#if loginErr}}
+      <p>{{loginErr}}</p>
+      {{/if}}
       <div class="mb-3">
         <a href="/singup">create new account</a>
       </div>

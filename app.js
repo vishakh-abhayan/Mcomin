@@ -34,7 +34,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 app.use(
   session({
-    name: "code",
     secret: "something",
     saveUninitialized: false,
     resave: false,
