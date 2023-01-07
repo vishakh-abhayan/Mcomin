@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var productHelpers = require("../helpers/product-helpers");
+
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   productHelpers.getAllProducts().then((product) => {
@@ -23,6 +24,13 @@ router.post("/add-products", (req, res) => {
         console.log(err);
       }
     });
+  });
+});
+
+router.get("/delete-product/:id", (req, res) => {
+  let proId = req.params.id;
+  productHelpers.deleteProduct(proId).then((response) => {
+    res.redirect("/admin/");
   });
 });
 

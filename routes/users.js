@@ -2,6 +2,13 @@ var express = require("express");
 var router = express.Router();
 var productHelpers = require("../helpers/product-helpers");
 var userHelpers = require("../helpers/user-helper");
+const verifyLogin = (req, res, next) => {
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+};
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -20,15 +27,18 @@ router.get("/login", (req, res) => {
   }
 });
 
-router.get("/cart", (req, res) => {
-  res.send("hi");
+router.get("/cart", verifyLogin, (req, res) => {
+  res.render("user/cart");
 });
 
 router.get("/singup", (req, res) => {
   res.render("user/singup");
 });
 router.post("/singup", (req, res) => {
-  userHelpers.doSingup(req.body).then((response) => {});
+  userHelpers.doSingup(req.body).then((response) => {
+    console.log(response);
+    res.redirect("/login");
+  });
 });
 router.post("/login", (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {

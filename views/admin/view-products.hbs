@@ -14,6 +14,7 @@
           <th scope="col">Category</th>
           <th scope="col">Description</th>
           <th>Image</th>
+          <th>Settings</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,18 @@
                 src="/product-images/{{this._id}}.jpg"
                 alt=""
               /></td>
+            <td>
+              <a
+                href="/admin/edit-product"
+                class="btn btn-secondary"
+              >Edit</a>
+              <a
+                href="/admin/delete-product/{{this._id}}"
+                class="btn btn-danger" 
+              >Delete</a>
+              </td>
+              </td>
+              
           </tr>
         {{/each}}
       </tbody>
