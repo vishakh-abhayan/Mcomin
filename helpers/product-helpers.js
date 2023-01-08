@@ -1,5 +1,6 @@
 var db = require("../config/connection");
 var collection = require("../config/collections");
+const { response } = require("express");
 var objectjId = require("mongodb").ObjectId;
 module.exports = {
   addproducts: (product, callback) => {
@@ -38,6 +39,26 @@ module.exports = {
         .findOne({ _id: objectjId(proId) })
         .then((product) => {
           reslove(product);
+        });
+    });
+  },
+  updateProduct: (proId, proData) => {
+    return new Promise((reslove, reject) => {
+      db.get()
+        .collection(collection.PRODUCT_COLLECTION)
+        .updateOne(
+          { _id: objectjId(proId) },
+          {
+            $set: {
+              Name: proData.Name,
+              Category: proData.Category,
+              Price: proData.Price,
+              Description: proData.Description,
+            },
+          }
+        )
+        .then((response) => {
+          reslove();
         });
     });
   },
