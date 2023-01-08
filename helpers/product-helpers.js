@@ -31,4 +31,14 @@ module.exports = {
         });
     });
   },
+  getProductDetails: (proId) => {
+    return new Promise((reslove, reject) => {
+      db.get()
+        .collection(collection.PRODUCT_COLLECTION)
+        .findOne({ _id: objectjId(proId) })
+        .then((product) => {
+          reslove(product);
+        });
+    });
+  },
 };
