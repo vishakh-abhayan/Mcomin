@@ -11,7 +11,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/add-products", function (req, res) {
-  res.render("admin/add-products");
+  res.render("admin/add-products", { admin: true });
 });
 router.post("/add-products", (req, res) => {
   productHelpers.addproducts(req.body, (id) => {
@@ -19,7 +19,7 @@ router.post("/add-products", (req, res) => {
     console.log(id);
     image.mv("./public/product-images/" + id + ".jpg", (err) => {
       if (!err) {
-        res.render("admin/add-products");
+        res.render("admin/add-products", { admin: true });
       } else {
         console.log(err);
       }

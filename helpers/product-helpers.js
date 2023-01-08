@@ -1,6 +1,6 @@
 var db = require("../config/connection");
 var collection = require("../config/collections");
-var objId = require("mongodb").ObjectId;
+var objectjId = require("mongodb").ObjectId;
 module.exports = {
   addproducts: (product, callback) => {
     db.get()
@@ -21,10 +21,11 @@ module.exports = {
     });
   },
   deleteProduct: (proId) => {
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
+      console.log(proId);
       db.get()
         .collection(collection.PRODUCT_COLLECTION)
-        .deleteOne({ _id: objId(proId) })
+        .deleteOne({ _id: objectjId(proId) })
         .then((response) => {
           resolve(response);
         });
