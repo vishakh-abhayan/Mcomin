@@ -37,7 +37,9 @@ router.get("/singup", (req, res) => {
 router.post("/singup", (req, res) => {
   userHelpers.doSingup(req.body).then((response) => {
     console.log(response);
-    res.redirect("/login");
+    req.session.loggedIn = true;
+    req.session.user = response.user;
+    res.redirect("/");
   });
 });
 router.post("/login", (req, res) => {
@@ -56,6 +58,12 @@ router.post("/login", (req, res) => {
 router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
+});
+
+router.get("/add-to-cart/:id", (req, res) => {
+  userHelpers.addToCart(req.params.id, req.session.user.id).then(() => {
+    res.redirect("/");
+  });
 });
 
 module.exports = router;

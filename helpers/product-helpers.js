@@ -1,6 +1,5 @@
 var db = require("../config/connection");
 var collection = require("../config/collections");
-const { response } = require("express");
 var objectjId = require("mongodb").ObjectId;
 module.exports = {
   addproducts: (product, callback) => {
