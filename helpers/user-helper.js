@@ -50,6 +50,16 @@ module.exports = {
         .collection(collection.CART_COLLECTION)
         .findOne({ user: objectjId(userId) });
       if (userCart) {
+        db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            { user: objectjId(userId) },
+            {
+              $push: {
+                products: objectjId(proId),
+              },
+            }
+          );
       } else {
         let cartObj = {
           user: objectjId(userId),
