@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <h2 class="text-center">Edit Products</h2>
         <form
-          action="/admin/edit-products/{{product._id}}"
+          action="/admin/edit-product/{{product._id}}"
           method="post"
           enctype="multipart/form-data"
         >
@@ -41,11 +41,22 @@
             src="/product-images/{{product._id}}.jpg"
             alt="..."
             style="width: 100px; height: auto;"
+            id="imgView"
+            class="pt-2 pb-2"
           />
-          <input name="image" type="file" class="form-control" />
+          <input
+            name="image"
+            type="file"
+            class="form-control"
+            onchange="viewImage(event)"
+          />
           <button type="submit" class="btn btn-success mt-4">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </section>
+<script>
+  function viewImage(event){ document.getElementById('imgView').src =
+  URL.createObjectURL(event.target.files[0])}
+</script>
