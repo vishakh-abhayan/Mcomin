@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 var db = require("../config/connection");
 var collection = require("../config/collections");
-const { response } = require("express");
 var objectjId = require("mongodb").ObjectId;
 
 module.exports = {
@@ -72,6 +71,36 @@ module.exports = {
             resolve();
           });
       }
+    });
+  },
+  getCartProduct: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let cartItems = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .aggregate([
+          {
+            $match: { user: objectjId(userId) },
+          },
+          {
+            $lookup: {
+              from: collection.PRODUCT_COLLECTION,
+              let: { proList: "$product" },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $in: ["$_id", "$$proList"],
+                    },
+                  },
+                },
+              ],
+              as: "cartItems",
+            },
+          },
+        ])
+        .toArray();
+      resolve(cartItems);
     });
   },
 };
