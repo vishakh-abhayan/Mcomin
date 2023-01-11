@@ -27,12 +27,6 @@ router.get("/login", (req, res) => {
   }
 });
 
-router.get("/cart", verifyLogin, async (req, res) => {
-  let product = await userHelpers.getCartProduct(req.session.user._id);
-  console.log(product);
-  res.render("user/cart");
-});
-
 router.get("/singup", (req, res) => {
   res.render("user/singup");
 });
@@ -66,6 +60,12 @@ router.get("/add-to-cart/:id", verifyLogin, (req, res) => {
   userHelpers.addToCart(req.params.id, req.session.user.id).then(() => {
     res.redirect("/");
   });
+});
+
+router.get("/cart", verifyLogin, async (req, res) => {
+  let product = await userHelpers.getCartProduct(req.session.user._id);
+  console.log(product);
+  res.render("user/cart");
 });
 
 module.exports = router;

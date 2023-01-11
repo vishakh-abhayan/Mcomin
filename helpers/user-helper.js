@@ -100,7 +100,8 @@ module.exports = {
           },
         ])
         .toArray();
-      resolve(cartItems);
+      console.log(cartItems);
+      console.log(userId);
     });
   },
 };
