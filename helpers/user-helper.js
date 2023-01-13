@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 var db = require("../config/connection");
 var collection = require("../config/collections");
+const { resolve } = require("express-hbs/lib/resolver");
 var objectjId = require("mongodb").ObjectId;
 
 module.exports = {
@@ -85,12 +86,12 @@ module.exports = {
           {
             $lookup: {
               from: collection.PRODUCT_COLLECTION,
-              let: { proList: "$product" },
+              let: { prodList: "$products" },
               pipeline: [
                 {
                   $match: {
                     $expr: {
-                      $in: ["$_id", "$$proList"],
+                      $in: ["$_id", "$$prodList"],
                     },
                   },
                 },
@@ -100,8 +101,19 @@ module.exports = {
           },
         ])
         .toArray();
-      console.log(cartItems);
-      console.log(userId);
+      resolve(cartItems[0].cartItems);
+    });
+  },
+  getCartCount: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let cart = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .findOne({ user: objectjId(userId) });
+      if (cart) {
+        count = cart.products.length;
+      }
+      resolve(count);
     });
   },
 };
