@@ -69,7 +69,7 @@ module.exports = {
           .collection(collection.CART_COLLECTION)
           .insertOne(cartObj)
           .then((response) => {
-            resolve();
+            resolve(responsex);
           });
       }
     });
