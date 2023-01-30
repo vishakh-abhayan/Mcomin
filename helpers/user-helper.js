@@ -104,16 +104,18 @@ module.exports = {
       resolve(cartItems[0].cartItems);
     });
   },
-  // getCartCount: (userId) => {
-  //   return new Promise(async (resolve, reject) => {
-  //     let cart = await db
-  //       .get()
-  //       .collection(collection.CART_COLLECTION)
-  //       .findOne({ user: objectjId(userId) });
-  //     if (cart) {
-  //       count = cart.products.length;
-  //     }
-  //     resolve();
-  //   });
-  // },
+  getCartCount: (userId) => {
+    return new Promise(async (resolve, reject) => {
+      let cart = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .findOne({ user: objectjId(userId) });
+      if (cart) {
+        count = cart.products.length;
+      } else {
+        count = 0;
+      }
+      resolve(count);
+    });
+  },
 };

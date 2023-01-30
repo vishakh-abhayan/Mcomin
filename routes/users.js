@@ -14,9 +14,9 @@ const verifyLogin = (req, res, next) => {
 router.get("/", async function (req, res, next) {
   let user = req.session.user;
   let cartCount = null;
-  // if (req.session.user) {
-  //   cartCount = await userHelpers.getCartCount(req.session.user._id);
-  // }
+  if (req.session.user) {
+    cartCount = await userHelpers.getCartCount(req.session.user._id);
+  }
   productHelpers.getAllProducts().then((product) => {
     res.render("user/view-products", { product, user, cartCount });
   });
