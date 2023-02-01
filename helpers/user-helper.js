@@ -68,7 +68,10 @@ module.exports = {
               {
                 $inc: { "products.$.quantity": 1 },
               }
-            );
+            )
+            .then(() => {
+              resolve();
+            });
         } else {
           db.get()
             .collection(collection.CART_COLLECTION)
@@ -105,24 +108,26 @@ module.exports = {
             $match: { user: objectjId(userId) },
           },
           {
+            $unwind: "$products",
+          },
+          {
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+            },
+          },
+          {
             $lookup: {
               from: collection.PRODUCT_COLLECTION,
-              let: { prodList: "$products" },
-              pipeline: [
-                {
-                  $match: {
-                    $expr: {
-                      $in: ["$_id", "$$prodList"],
-                    },
-                  },
-                },
-              ],
-              as: "cartItems",
+              localField: "item",
+              foreignField: "_id",
+              as: "products",
             },
           },
         ])
         .toArray();
-      resolve(cartItems[0].cartItems);
+      console.log(cartItems[1].products);
+      resolve(cartItems);
     });
   },
   getCartCount: (userId) => {
