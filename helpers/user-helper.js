@@ -121,12 +121,11 @@ module.exports = {
               from: collection.PRODUCT_COLLECTION,
               localField: "item",
               foreignField: "_id",
-              as: "products",
+              as: "product",
             },
           },
         ])
         .toArray();
-      console.log(cartItems[1].products);
       resolve(cartItems);
     });
   },
