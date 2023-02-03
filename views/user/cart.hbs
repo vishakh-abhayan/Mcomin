@@ -13,14 +13,18 @@
       <tbody class="table-group-divider">
         {{#each product}}
           <tr>
-            <th scope="row">1</th>
-            <td><img
-                style="height: 70px;"
-                src="/product-images/{{this._id}}.jpg"
-                alt=""
-              /></td>
-            <td>{{this.Name}}</td>
-            <td class="p-2"><button class="btn btn-secondary">-</button>1<button
+            {{#each this.product}}
+              <th scope="row">1</th>
+              <td><img
+                  style="height: 70px;"
+                  src="/product-images/{{this._id}}.jpg"
+                  alt=""
+                /></td>
+              <td>{{this.Name}}</td>
+            {{/each}}
+            <td class="p-2"><button
+                class="btn btn-secondary"
+              >-</button>{{this.quantity}}<button
                 class="btn btn-primary"
               >+</button></td>
             <td><a class="btn btn-danger" href="">Remove</a></td>
