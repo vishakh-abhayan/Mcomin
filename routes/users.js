@@ -70,4 +70,11 @@ router.get("/add-to-cart/:id", (req, res) => {
   userHelpers.addToCart(req.params.id, req.session.user._id);
   res.json({ status: true });
 });
+
+router.post("/change-product-quantity", (req, res) => {
+  userHelpers.changeProductQuntity(req.body).then((response) => {
+    console.log(response);
+  });
+});
+
 module.exports = router;
