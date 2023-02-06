@@ -13,20 +13,24 @@
       <tbody class="table-group-divider">
         {{#each product}}
           <tr>
-            {{#each this.product}}
-              <th scope="row">1</th>
-              <td><img
-                  style="height: 70px;"
-                  src="/product-images/{{this._id}}.jpg"
-                  alt=""
-                /></td>
-              <td>{{this.Name}}</td>
-            {{/each}}
-            <td class="p-2"><button
+            <th scope="row">1</th>
+            <td><img
+                style="height: 70px;"
+                src="/product-images/{{this.product._id}}.jpg"
+                alt=""
+              /></td>
+            <td>{{this.product.Name}}</td>
+            <td class="p-2">
+              <button
                 class="btn btn-secondary"
-              >-</button>{{this.quantity}}<button
+                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)"
+              >-</button>
+              {{this.quantity}}
+              <button
                 class="btn btn-primary"
-              >+</button></td>
+                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)"
+              >+</button>
+            </td>
             <td><a class="btn btn-danger" href="">Remove</a></td>
           </tr>
         {{/each}}
@@ -34,3 +38,9 @@
     </table>
   </div>
 </section>
+
+<script>
+  function changeQuantity(cartId,proId,count){ $.ajax({
+  url:'/change-product-quantity', data:{ cart:cartId, product:proId, count:count
+  }, method:'post', success:(response)=>{ alert(response) } }) }
+</script>
