@@ -13,7 +13,7 @@
       <tbody class="table-group-divider">
         {{#each product}}
           <tr>
-            <th scope="row">1</th>
+            <td scope="row">01730</td>
             <td><img
                 style="height: 70px;"
                 src="/product-images/{{this.product._id}}.jpg"
@@ -25,7 +25,9 @@
                 class="btn btn-secondary"
                 onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)"
               >-</button>
-              {{this.quantity}}
+              <span id="{{this.product._id}}">
+                {{this.quantity}}
+              </span>
               <button
                 class="btn btn-primary"
                 onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)"
@@ -39,8 +41,10 @@
   </div>
 </section>
 
-<script>
-  function changeQuantity(cartId,proId,count){ $.ajax({
+{{! <script>
+  function changeQuantity(cartId,proId,count){ 
+    let quantity =
+  parseInt(document.getElementById(proId).innerHTML) $.ajax({
   url:'/change-product-quantity', data:{ cart:cartId, product:proId, count:count
   }, method:'post', success:(response)=>{ alert(response) } }) }
-</script>
+</script> }}
