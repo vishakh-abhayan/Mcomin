@@ -3,9 +3,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
           <th scope="col">Item</th>
           <th scope="col">Title</th>
+          <th scope="col">price</th>
           <th scope="col">Quantity</th>
           <th scope="col">Settings</th>
         </tr>
@@ -13,13 +13,13 @@
       <tbody class="table-group-divider">
         {{#each product}}
           <tr>
-            <td scope="row">01730</td>
             <td><img
                 style="height: 70px;"
                 src="/product-images/{{this.product._id}}.jpg"
                 alt=""
               /></td>
             <td>{{this.product.Name}}</td>
+            <td scope="row">Rs-/{{this.product.Price}}</td>
             <td class="p-2">
               <button
                 class="btn btn-secondary"
