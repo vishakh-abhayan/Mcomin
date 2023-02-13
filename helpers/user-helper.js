@@ -152,22 +152,43 @@ module.exports = {
     });
   },
   changeProductQuntity: (data) => {
-    return new Promise((resolve, reject) => {
-      count = parseInt(data.count);
-      db.get()
-        .collection(collection.CART_COLLECTION)
-        .updateOne(
-          {
-            _id: objectjId(data.cart),
-            "products.item": objectjId(data.product),
-          },
-          {
-            $inc: { "products.$.quantity": count },
-          }
-        )
-        .then((response) => {
-          resolve(response);
-        });
-    });
+    data.count = parseInt(data.count);
+    data.quantity = parseInt(data.quantity);
+    if (data.count == -1 && data.quantity == 1) {
+      return new Promise((resolve, reject) => {
+        count = parseInt(data.count);
+        db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            {
+              _id: objectjId(data.cart),
+            },
+            {
+              $pull: { products: { item: objectjId(data.product) } },
+            }
+          )
+          .then((response) => {
+            resolve({ removeProduct: true });
+          });
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        count = parseInt(data.count);
+        db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            {
+              _id: objectjId(data.cart),
+              "products.item": objectjId(data.product),
+            },
+            {
+              $inc: { "products.$.quantity": count },
+            }
+          )
+          .then((response) => {
+            resolve(true);
+          });
+      });
+    }
   },
 };
