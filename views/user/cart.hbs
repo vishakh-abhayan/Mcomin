@@ -1,10 +1,10 @@
 <section>
-  <div class="conatainer pt-4">
+  <div class="conatainer pt-4 p-5">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Item</th>
-          <th scope="col">Title</th>
+          {{! <th scope="col">Title</th> }}
           <th scope="col">price</th>
           <th scope="col">Quantity</th>
           <th scope="col">Settings</th>
@@ -18,7 +18,7 @@
                 src="/product-images/{{this.product._id}}.jpg"
                 alt=""
               /></td>
-            <td>{{this.product.Name}}</td>
+            {{!-- <td>{{this.product.Name}}</td> --}}
             <td scope="row">Rs-/{{this.product.Price}}</td>
             <td class="p-2">
               <button
@@ -38,6 +38,15 @@
         {{/each}}
       </tbody>
     </table>
+    <hr />
+    <div class="float-right pr-5 ml-5">
+      <h5 class="float-right mr-5 mt-4">Total:Rs-/10000000</h5><br />
+      <a
+        href="/place-order"
+        class="float-left btn btn-success"
+        style="width: 15%;"
+      ><b> Place Order</b></a>
+    </div>
   </div>
 </section>
 

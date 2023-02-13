@@ -76,4 +76,8 @@ router.post("/change-product-quantity", (req, res, next) => {
   });
 });
 
+router.get("/place-order", (req, res) => {
+  res.render("user/place-order");
+});
+
 module.exports = router;
