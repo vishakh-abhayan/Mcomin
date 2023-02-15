@@ -23,15 +23,12 @@
             <td class="p-2">
               <button
                 class="btn btn-secondary"
-                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)"
+                onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)"
               >-</button>
               <span id="{{this.product._id}}">
                 {{this.quantity}}
               </span>
-              <button
-                class="btn btn-primary"
-                onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)"
-              >+</button>
+              <button class="btn btn-primary" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
             </td>
             <td><a class="btn btn-danger" href="">Remove</a></td>
           </tr>
@@ -40,7 +37,7 @@
     </table>
     <hr />
     <div class="float-right pr-5 ml-5">
-      <h5 class="float-right mr-5 mt-4">Total:Rs-/10000000</h5><br />
+      <h5 class="float-right mr-5 mt-4">Total:Rs-/ <span id="total">{{total}}</span></h5><br />
       <a
         href="/place-order"
         class="float-left btn btn-success"
@@ -49,11 +46,27 @@
     </div>
   </div>
 </section>
-
-{{! <script>
-  function changeQuantity(cartId,proId,count){ 
-    let quantity =
-  parseInt(document.getElementById(proId).innerHTML) $.ajax({
-  url:'/change-product-quantity', data:{ cart:cartId, product:proId, count:count
-  }, method:'post', success:(response)=>{ alert(response) } }) }
-</script> }}
+<script>
+  function changeQuantity(cartId, proId,userId, count) {
+    console.log(userId)
+  let quantity = parseInt(document.getElementById(proId).innerHTML);
+  count = parseInt(count);
+  $.ajax({
+    url: "/change-product-quantity",
+    data: { user:userId,cart: cartId, product: proId, count: count, quantity: quantity },
+    method: "post",
+    success: (response) => {
+      console.log(response)
+        response.total = parseInt(response.total.$numberDecimal); 
+        console.log(total);
+      if (response.removeProduct) {
+        alert("product removed from cart");
+        location.reload();
+      } else {
+        document.getElementById(proId).innerHTML = quantity + count;
+        document.getElementById('total').innerHTML =response.total;
+      }
+    },
+  });
+}
+</script>
