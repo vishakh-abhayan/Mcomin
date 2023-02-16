@@ -43,6 +43,7 @@ router.post("/singup", (req, res) => {
 });
 router.post("/login", (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
+    console.log(req.body, "###");
     if (response.status) {
       req.session.loggedIn = true;
       req.session.user = response.user;
@@ -80,7 +81,16 @@ router.post("/change-product-quantity", (req, res, next) => {
 
 router.get("/place-order", verifyLogin, async (req, res) => {
   let total = await userHelpers.getTotalAmount(req.session.user._id);
-  res.render("user/place-order", { total });
+  res.render("user/place-order", { total, user: req.session.user });
+});
+
+router.post("/place-order", async (req, res) => {
+  console.log(req.body, "****");
+  let productList = await userHelpers.getCartProductList(req.body.userId);
+  let totalPrice = await userHelpers.getTotalAmount(req.body.userId);
+  userHelpers
+    .placeOrder(req.body, productList, totalPrice)
+    .then((response) => {});
 });
 
 module.exports = router;
