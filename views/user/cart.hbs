@@ -47,24 +47,30 @@
   </div>
 </section>
 <script>
-  function changeQuantity(cartId, proId,userId, count) {
-    console.log(userId)
+  function changeQuantity(cartId, proId, userId, count) {
+  console.log(userId);
   let quantity = parseInt(document.getElementById(proId).innerHTML);
   count = parseInt(count);
   $.ajax({
     url: "/change-product-quantity",
-    data: { user:userId,cart: cartId, product: proId, count: count, quantity: quantity },
+    data: {
+      user: userId,
+      cart: cartId,
+      product: proId,
+      count: count,
+      quantity: quantity,
+    },
     method: "post",
     success: (response) => {
-      console.log(response)
-        response.total = parseInt(response.total.$numberDecimal); 
-        console.log(total);
+      console.log(response);
+      response.total = parseInt(response.total.$numberDecimal);
+      console.log(total);
       if (response.removeProduct) {
         alert("product removed from cart");
         location.reload();
       } else {
         document.getElementById(proId).innerHTML = quantity + count;
-        document.getElementById('total').innerHTML =response.total;
+        document.getElementById("total").innerHTML = response.total;
       }
     },
   });

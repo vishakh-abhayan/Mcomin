@@ -6,7 +6,7 @@ var logger = require("morgan");
 var hbs = require("express-handlebars");
 var fileUpload = require("express-fileupload");
 var session = require("express-session");
-
+const bodyParser = require("body-parser");
 var usersRouter = require("./routes/users");
 var adminRouter = require("./routes/admin");
 
@@ -27,6 +27,7 @@ app.engine(
 );
 
 app.use(logger("dev"));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
